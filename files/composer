@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+php -d allow_url_fopen=On /usr/local/bin/composer.phar $@

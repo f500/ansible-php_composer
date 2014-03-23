@@ -1,0 +1,5 @@
+---
+
+dependencies:
+  - php
+  - php_cli

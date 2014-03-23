@@ -1,0 +1,7 @@
+---
+
+- name: install composer
+  shell: curl -sS https://getcomposer.org/installer | php -d allow_url_fopen=On chdir=/usr/local/bin creates=/usr/local/bin/composer.phar
+
+- name: install composer bash-script
+  copy: src=composer dest=/usr/local/bin/composer owner=root group=root mode=0755
