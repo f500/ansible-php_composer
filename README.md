@@ -6,12 +6,13 @@ Install ComposerPHP
 Requirements
 ------------
 
-Debian Wheezy with the package python-pycurl and python-software-properties installed.
+Debian Wheezy/Jessie with the package python-pycurl and python-software-properties installed.
+In addition, it is assumed that the PHP-cli is already installed.
 
 Dependencies
 ------------
 
-Depends on f500.php, f500.php_cli.
+None.
 
 Example Playbook
 -------------------------
