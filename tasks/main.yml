@@ -34,3 +34,10 @@
 - name: Move Composer to the install path
   command: mv /tmp/composer.phar "{{ php_composer_install_path }}"
   when: not php_composer_binary.stat.exists
+
+- name: Enable the wrapper
+  template:
+    src: composer.j2
+    dest: "{{ php_composer_wrapper_path }}"
+    mode: 0755
+  when: php_composer_wrapper_enabled

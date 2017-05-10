@@ -17,7 +17,22 @@ Role Variables
 
 Specify the path where Composer will be installed:
 
-    php_composer_install_path: /usr/local/bin/composer
+    php_composer_install_path: /usr/local/bin/composer.phar
+
+Composer relies on the INI directive `allow_url_fopen` turned on, and uses the `proc_open()` function.
+This goes against configuration best practices, so chances are Composer won't work in all circumstances.
+
+Another common issue is a memory limit, which is hit when computing a dependency graph.
+
+In order to have Composer function in all (or at least most) cases, a wrapper-script is installed.
+The following variables control how this wrapper functions:
+
+    php_composer_wrapper_enabled: yes
+    php_composer_wrapper_path: /usr/local/bin/composer
+    php_composer_wrapper_ini_directives:
+      allow_url_fopen: yes
+      disable_functions: ""
+      memory_limit: -1
 
 Dependencies
 ------------
@@ -29,7 +44,7 @@ Example Playbook
 
     - hosts: servers
       roles:
-        - { role: f500.php_composer, php_composer_install_path: /bin/composer }
+        - { role: f500.php_composer, php_composer_install_path: /usr/local/bin/composer, php_composer_wrapper_enabled: no }
 
 License
 -------
