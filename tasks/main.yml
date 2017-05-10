@@ -1,7 +1,36 @@
 ---
 
-- name: install composer
-  shell: curl -sS https://getcomposer.org/installer | php -d allow_url_fopen=On chdir=/usr/local/bin creates=/usr/local/bin/composer.phar
+- name: Check if Composer is installed
+  stat:
+    path: "{{ php_composer_install_path }}"
+  register: php_composer_binary
 
-- name: install composer bash-script
-  copy: src=composer dest=/usr/local/bin/composer owner=root group=root mode=0755
+- name: Install packages needed to install Composer
+  apt:
+    name: "{{ item }}"
+  with_items:
+    - wget
+  when: not php_composer_binary.stat.exists
+
+- name: Create the install script
+  copy:
+    src: composer-install.sh
+    dest: /tmp/composer-install.sh
+    mode: 0755
+  when: not php_composer_binary.stat.exists
+
+- name: Install Composer
+  command: ./composer-install.sh
+  args:
+    chdir: /tmp
+  when: not php_composer_binary.stat.exists
+
+- name: Remove the install script
+  file:
+    path: /tmp/composer-install.sh
+    state: absent
+  when: not php_composer_binary.stat.exists
+
+- name: Move Composer to the install path
+  command: mv /tmp/composer.phar "{{ php_composer_install_path }}"
+  when: not php_composer_binary.stat.exists
