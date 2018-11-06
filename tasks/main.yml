@@ -7,9 +7,8 @@
 
 - name: Install packages needed to install Composer
   apt:
-    name: "{{ item }}"
-  with_items:
-    - wget
+    name: wget
+    state: present
   when: not php_composer_binary.stat.exists
 
 - name: Create the install script
