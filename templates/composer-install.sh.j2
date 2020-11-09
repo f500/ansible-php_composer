@@ -11,7 +11,8 @@ then
     exit 1
 fi
 
-php -d allow_url_fopen=On composer-setup.php --quiet
+php -d allow_url_fopen=On composer-setup.php --quiet {% if php_composer_version %}--version={{ php_composer_version }}{% endif %}
+
 RESULT=$?
 rm composer-setup.php
 exit $RESULT
