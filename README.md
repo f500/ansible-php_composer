@@ -19,6 +19,10 @@ Specify the path where Composer will be installed:
 
     php_composer_install_path: /usr/local/bin/composer.phar
 
+Specify a fixed version of composer that you want to install (defaults to `~`, which means the latest stable)
+
+    php_composer_version: 1.10.17
+
 Composer relies on the INI directive `allow_url_fopen` turned on, and uses the `proc_open()` function.
 This goes against configuration best practices, so chances are Composer won't work in all circumstances.
 
