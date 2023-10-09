@@ -6,12 +6,12 @@ galaxy_info:
   description: Install Composer, the dependency manager for PHP
   company: Future500
   license: LGPL-3.0
-  min_ansible_version: 1.4
+  min_ansible_version: "1.4"
   platforms:
   - name: Debian
     versions:
       - bullseye
       - bookworm
-  categories:
+  galaxy_tags:
     - web
     - system
